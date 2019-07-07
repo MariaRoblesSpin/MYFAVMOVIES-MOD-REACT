@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import MyFavMovies from './MyApp'
+import MyFavMovies from './MyFavMovies'
 import NewMovies from './NewMovies'
 import MovieDetail from './MovieDetail'
 
