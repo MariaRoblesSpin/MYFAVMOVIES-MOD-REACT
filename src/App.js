@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
-import MyApp from './MyApp'
+import MyMovies from './MyMovies'
 
 export default () =>
   <BrowserRouter>
-    <MyApp />
+    <MyMovies />
   </BrowserRouter>

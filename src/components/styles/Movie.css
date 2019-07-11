@@ -1,0 +1,17 @@
+.movie-resume {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.movie-resume__image {
+    width: 40%;
+    border-radius: 10px;
+    margin-right: 30px;
+    box-shadow: 0px 5px 5px grey;
+}
+.movie-resume__info {
+    width: 60%;
+
+}

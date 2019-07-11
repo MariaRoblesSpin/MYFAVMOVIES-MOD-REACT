@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './styles/Showcase.css'
 const Showcase = props =>
   <ul className='showcase'>
     {

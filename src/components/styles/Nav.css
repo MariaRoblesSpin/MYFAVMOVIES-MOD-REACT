@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Bahianita&display=swap');
+
+.navbar {
+    box-shadow: 0px 5px 5px grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between; 
+    font-family: 'Bahianita';
+    font-size: 30px;
+}
+.menu {
+    list-style: none;
+    display: flex;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+.menu__option {
+    display: inline;
+    padding: 0 10px;
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+    color:black;
+}

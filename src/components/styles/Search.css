@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Bahiana&display=swap');
+.search {
+    display: flex;
+    width: 60%;
+}
+.search__icon {
+    margin-right: 5px;
+    font-size: 20px;
+    align-self: center;
+}
+.search__input {
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+.search__button {
+    padding: 0px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    background-color: white;
+    font-family: 'Bahiana';
+    font-size: 24px;
+}
+@keyframes slideIn {
+    from {margin-left:54%}
+    to {margin-left: 7%}
+}
+.staticForm {
+    padding: 0;
+    display: flex;
+    margin-top: 3px;
+    margin-left:54%;
+    position: absolute;
+}
+.movingForm {
+    padding: 0;
+    display: flex;
+    margin-top: 3px;
+    margin-left: 7%;
+    position: absolute;
+    width: 500px;
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier();
+}

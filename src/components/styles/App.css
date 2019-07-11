@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Bahiana|Roboto&display=swap');
+
+body {
+  font-family: 'Roboto';
+  width: 100vw;
+}
+
 .App {
   text-align: center;
 }

@@ -13,7 +13,10 @@ const MOVIES = Array
   description: 'una descripción cualesquiera',
   more: '+ more info'
 }))
-class ListContent extends React.Component {
+class CollectionContent extends React.Component {
+  moviesByCollection = (collection) => {
+
+  }
   render () {
     return (
       <Showcase keyFn={(element) => (element.id)} elements={MOVIES} render={movie =>
@@ -24,4 +27,4 @@ class ListContent extends React.Component {
     )
   }
 }
-export default ListContent
+export default CollectionContent

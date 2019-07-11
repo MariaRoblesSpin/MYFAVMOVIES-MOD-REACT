@@ -1,0 +1,9 @@
+.showcase {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.showcase__option {
+    margin: 20px 30px;
+    padding: 0;
+}

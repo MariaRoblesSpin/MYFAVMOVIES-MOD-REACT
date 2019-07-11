@@ -1,0 +1,35 @@
+.form-new-list {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form-new-list__label {
+    width:70%;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: 'Bahiana';
+}
+.form-new-list__input {
+    width: 70%;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.form-new-list__button {
+    width: 30%;
+    padding: 0px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    background-color: white;
+    font-family: 'Bahiana';
+    font-size: 34px;
+}

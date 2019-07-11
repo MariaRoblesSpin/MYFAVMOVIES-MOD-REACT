@@ -2,28 +2,18 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Showcase from './Showcase'
 import Movie from './Movie'
-
-// const MOVIES = Array
-// .from({ length: 10 })
-// .map((_, index) => ({
-//   id: index,
-//   name: 'un nombre', 
-//   date:'2019', 
-//   image: '', 
-//   description: 'una descripción cualesquiera',
-//   more: '+ more info'
-// }))
-const API_KEY = 'e8d0c6f447943a0113e6530f4fc4b2fc'
-const NEW_MOVIES_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`
+import { discover } from '../api'
 class NewMovies extends React.Component {
-  state = { movies: [], loading: true, error: false }
+  state = { 
+    movies: [], 
+    loading: true, 
+    error: false 
+  }
   componentDidMount = async () => {
     this.setState({ loading: true })
     try {
-      this.setState({ loading: true })
-      const response = await fetch(NEW_MOVIES_URL)
-      const data = await response.json()
-      this.setState({ movies: data.results })
+      const results = await discover()
+      this.setState({ movies: results })
     } catch (error) {
       this.setState({ error: true })
     } finally {

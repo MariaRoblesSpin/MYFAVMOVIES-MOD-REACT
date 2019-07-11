@@ -1,26 +1,45 @@
 import React from 'react'
-import NewList from './NewList'
-import MyLists from './MyLists'
-const LISTS = Array
-.from({ length: 10 })
-.map((_, index) => ({
-  id: index,
-  name: 'un nombre de lista', 
-  description: 'una descripción cualesquiera',
-}))
+import NewCollection from './NewCollection'
+import MyCollections from './MyCollections'
+import './styles/MyFavMovies.css'
+import Context from '../Context'
+
 class MyFavMovies extends React.Component {
+  state = { showingForm: false }
   render () {
+    const { showingForm } = this.state
+    // Estos sería necesario para comprobar la longitud de las colecciones si en lugar de un array fuera un objeto 
+    // const objectKeys = Object.keys(collections)
+    // const lengthObject = objectKeys.length 
     return (
-      <>
-        <p>Aquí van las listas de películas favoritas</p>
-        <NewList />
+      <Context.Consumer>
         {
-          LISTS.length > 0
-            ? <MyLists getInfo={LISTS} />
-            : <p>There is no list created yet.</p>
+          ({ addCollection, collections }) =>
+          <>
+          <button className='button' onClick={this.showForm}>¡Crea una colección!</button>
+          {
+            showingForm &&
+            <NewCollection onSubmit={addCollection} />
+            
+          }
+          {
+          console.log('length de lists: ', typeof collections)
+          }
+          {
+            //lengthObject > 0 
+            //para el caso del objeto con el id como índice.
+            collections.length > 0
+              ? <MyCollections getInfo={collections} />
+              : <p className='message'>There is no collection created yet.</p>
+          }
+          </>
         }
-      </>
+      </Context.Consumer>
+     
     )
+  }
+  showForm = () => {
+    this.setState({ showingForm: true })
   }
 }
 
