@@ -25,45 +25,63 @@ class MyMovies extends React.Component {
           ...previousState.collections
         ]
       }
-    // no voy a emplear esta estructura porque convierto mis colecciones en un objeto multidimensional 
-    // y pierdo los métodos de array para trabajar sobre ellas
-    // const nextState = {
-    //   collections: {
-    //     [collection.id]: newCollection,
-    //     ...previousState.collections
-    //   }
-    // }
+    
+    const alreadyCreated = previousState.collections.find(({ title }) => title === newCollection.title)
+    
+    if (!alreadyCreated) {
+      this.setState(nextState)
+      localStorage.setItem(
+        'collections',
+        JSON.stringify(nextState.collections)
+      )
+    }
+  }
+  addMovieToCollection = (idCollectionObj) => {
+    // Es necesario añadir la película al array de películas existentes en la colección seleccionada
+    // y sustituir la colección entre las existentes con la nueva película incluída.
+    console.log('valor de idCollection en el objeto que recibo de handleselect: ', idCollectionObj.value)
+    console.log('valor de movie en el objeto que recibo de handleselect XXXXXXXXXXXXXXXXX: ', idCollectionObj.movie)
+    const selectedCollection = idCollectionObj.value
+    const newMovie = idCollectionObj.movie
+    const previousState = this.state
+    const newCollections = previousState.collections.map( (collection) => {
+      console.log('Comprobando valor de newMovie: ', newMovie)
+      if (collection.id == selectedCollection) {
+        const favMovies = collection.favMovies
+        const alreadyInCollection = favMovies.find(({ id }) => id === newMovie.id)
+        if (!alreadyInCollection) {
+          favMovies.unshift(newMovie)
+        }
+
+        // MAL: con esta estructura aparece la collección con el key collection, a continuación el key favMovies con el contenido de newMovie.
+        // return {
+        //   collection,
+        //   favMovies: {
+        //     newMovie,
+        //     ...favMovies
+        //   } 
+        // }
+        // MAL: Con esta estructura queda newMovie dentro de favMovies con el nombre de propiedad newMovie y además en el nivel de collection. 
+        // return Object.assign(
+        //   {},
+        //   collection, 
+        //   collection.favMovies = {
+        //     newMovie,
+        //     ...collection.favMovies
+        //   }
+        // )
+      }
+      return collection
+    })
+    const nextState = [
+      ...newCollections
+    ]
+    console.log('valor de newObjCollections: ', nextState)
     this.setState(nextState)
     localStorage.setItem(
       'collections',
-      JSON.stringify(nextState.collections)
+      JSON.stringify(nextState)
     )
-  }
-  addMovieToCollection = (idCollection, movie) => {
-    // Es necesario añadir la película al array de películas existentes en la colección seleccionada
-    // y sustituir la colección entre las existentes con la nueva película incluída.
-    this.setState( previousState => {
-      const newCollections = previousState.collections.map( collection => {
-        if (collection.id === idCollection) {
-          const newMovies = {
-            ...collection.favMovies,
-            movie
-          }
-          return Object.assign({}, collection, {
-            favMovies: newMovies
-          } )
-        }
-        return collection
-      })
-      return {
-        collections: [ ...newCollections ] 
-      }
-      // no sé como meter collections de nuevo en localStorage puesto que después de un return no puedes añadir nada más
-    })
-    // localStorage.setItem(
-    //   'collections',
-    //   JSON.stringify(collections)
-    // )
   }
   render () {
     return (
@@ -79,9 +97,9 @@ class MyMovies extends React.Component {
     )
   }
  
-  // componentWillUnmount = () => {
-  //   localStorage.clear();
-  // }
+  componentWillUnmount = () => {
+    localStorage.clear();
+  }
   getMovies = (movies) => {
     this.setState({
       movies: movies

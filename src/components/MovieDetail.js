@@ -14,7 +14,8 @@ class MovieDetail extends React.Component {
   state = {
     loading: false, 
     error: false,
-    movie: {}
+    movie: {},
+    chose: ''
   }
   componentDidMount = async () => {
     this.setState({ loading: true })
@@ -43,7 +44,7 @@ class MovieDetail extends React.Component {
               <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
               <div className='movie__info'>
                 <h2 className='movie__title'>{movie.title}</h2>
-                <SelectCollection movie={movie} />
+                <SelectCollection movie={movie} onSelect={addMovieToCollection}/>
                 <p className='movie__content'>{movie.overview}</p>
               </div>
             </div>
