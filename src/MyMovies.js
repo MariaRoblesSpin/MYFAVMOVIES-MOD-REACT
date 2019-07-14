@@ -134,16 +134,14 @@ class MyMovies extends React.Component {
     const idCollection = paramObj.idCollection
     const previousState = this.state
     console.log('previousState: ', previousState)
-    const getRating = previousState.collections.map(collection => {
+    let getRating = 0
+    previousState.collections.map(collection => {
       if (collection.id == idCollection) {
-        const ratingOK = collection.favMovies.map( favMovie => {
+        collection.favMovies.map( favMovie => {
           if (favMovie.id == currentMovie.id) {
-            console.log('valor favMovie: ', favMovie)
             console.log('valor favMovie.rating: ', favMovie.rating)
-            return favMovie.rating
-
+            getRating = favMovie.rating
         }})
-        return ratingOK
       }
     })
     console.log('valor getRating: ', getRating)

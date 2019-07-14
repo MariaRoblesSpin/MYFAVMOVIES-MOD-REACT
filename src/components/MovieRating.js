@@ -20,11 +20,19 @@ class MovieRating extends React.Component {
   }
   _handleRating = (value) => {
     try {
-      const rating = value
+      
+      // Así recoge bien el dato para mandarlo al on Rating pero no funciona el rate
+      // const rating = value 
       const movie = this.props.movie
       const idCollection = this.props.idCollection
+      // De esta manera no funciona el on rating (llega el dato con un click de retraso), y tampoco funciona el rate
+      const { rating } = this.state 
+      // callback de this props rate y onrating para resolver los problemas de asincronía del setState
+      this.setState({ rating: value }, () => {
+        this.props.rate({ movie, idCollection })
+    })
       this.props.onRating({ rating, movie, idCollection })
-      this.props.rate({ movie, idCollection })
+      // this.props.rate({ movie, idCollection })
     } catch (error) {
       console.log('error in handleRating: ', error)
     }
