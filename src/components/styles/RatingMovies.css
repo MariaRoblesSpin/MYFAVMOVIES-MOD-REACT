@@ -1,0 +1,24 @@
+span.fa.fa-star {
+    width: 100px !important;
+}
+/* .rating {
+    display: block;
+    margin-bottom: 1.5em;
+  }
+.rating__input {
+visibility: hidden;
+font-size: 3em;
+display: inline-block;
+margin: 0 .2em;
+}
+
+.rating__input:before {
+content: '\2B50';
+visibility: visible;
+display: inline-block;
+transform: translate(-50%, -50%);
+}
+.rating__input--highlight {
+color: yellow;
+} */
+  

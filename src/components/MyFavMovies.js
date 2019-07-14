@@ -14,7 +14,7 @@ class MyFavMovies extends React.Component {
     return (
       <Context.Consumer>
         {
-          ({ addCollection, collections }) =>
+          ({ addCollection, collections, deleteCollection }) =>
           <>
           <button className='button' onClick={this.showForm}>¡Crea una colección!</button>
           {
@@ -23,13 +23,10 @@ class MyFavMovies extends React.Component {
             
           }
           {
-          console.log('length de lists: ', typeof collections)
-          }
-          {
             //lengthObject > 0 
             //para el caso del objeto con el id como índice.
             collections.length > 0
-              ? <MyCollections getInfo={collections} />
+              ? <MyCollections details={collections} onDelete={deleteCollection} />
               : <p className='message'>There is no collection created yet.</p>
           }
           </>

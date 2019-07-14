@@ -32,65 +32,136 @@ class MyMovies extends React.Component {
       this.setState(nextState)
       localStorage.setItem(
         'collections',
-        JSON.stringify(nextState.collections)
+        JSON.stringify(nextState)
       )
     }
   }
-  addMovieToCollection = (idCollectionObj) => {
-    // Es necesario añadir la película al array de películas existentes en la colección seleccionada
-    // y sustituir la colección entre las existentes con la nueva película incluída.
-    console.log('valor de idCollection en el objeto que recibo de handleselect: ', idCollectionObj.value)
-    console.log('valor de movie en el objeto que recibo de handleselect XXXXXXXXXXXXXXXXX: ', idCollectionObj.movie)
-    const selectedCollection = idCollectionObj.value
-    const newMovie = idCollectionObj.movie
+  
+  deleteCollection = collection => {
     const previousState = this.state
-    const newCollections = previousState.collections.map( (collection) => {
-      console.log('Comprobando valor de newMovie: ', newMovie)
-      if (collection.id == selectedCollection) {
-        const favMovies = collection.favMovies
-        const alreadyInCollection = favMovies.find(({ id }) => id === newMovie.id)
-        if (!alreadyInCollection) {
-          favMovies.unshift(newMovie)
-        }
-
-        // MAL: con esta estructura aparece la collección con el key collection, a continuación el key favMovies con el contenido de newMovie.
-        // return {
-        //   collection,
-        //   favMovies: {
-        //     newMovie,
-        //     ...favMovies
-        //   } 
-        // }
-        // MAL: Con esta estructura queda newMovie dentro de favMovies con el nombre de propiedad newMovie y además en el nivel de collection. 
-        // return Object.assign(
-        //   {},
-        //   collection, 
-        //   collection.favMovies = {
-        //     newMovie,
-        //     ...collection.favMovies
-        //   }
-        // )
-      }
-      return collection
-    })
-    const nextState = [
-      ...newCollections
-    ]
-    console.log('valor de newObjCollections: ', nextState)
+    const nextState = {
+      ...previousState, 
+      collections: previousState.collections.filter(({title}) => title != collection.title )
+    }
+    // const nextState = previousState.collections.filter(({title}) => title != collection.title )
+    // esta línea no actualiza el componente... sin embargo con el spread sí funciona...
     this.setState(nextState)
     localStorage.setItem(
       'collections',
       JSON.stringify(nextState)
     )
   }
+  addMovieToCollection = idCollectionObj => {
+    const selectedCollection = idCollectionObj.value
+    const newMovie = idCollectionObj.movie
+    const previousState = this.state
+    const newCollections = previousState.collections.map(collection => {
+      if (collection.id == selectedCollection) {
+        const favMovies = collection.favMovies
+        const alreadyInCollection = favMovies.find(({ id }) => id === newMovie.id)
+        if (!alreadyInCollection) {
+          favMovies.unshift(newMovie)
+        }
+      }
+      return collection
+    })
+    const nextState = {
+      collections: [...newCollections]
+    }
+      
+    this.setState(nextState)
+    localStorage.setItem(
+      'collections',
+      JSON.stringify(nextState)
+    )
+  }
+  deleteMovieFromCollection = idCollectionObj => {
+    const selectedCollection = idCollectionObj.value
+    const currentMovie = idCollectionObj.movie
+    const previousState = this.state
+    const collectionsWithoutMovie = previousState.collections.map( collection => {
+      if (collection.id == selectedCollection) {
+        const newFavMovies = collection.favMovies.filter(({id}) => id != currentMovie.id)
+        return Object.assign({}, collection, {
+          favMovies: newFavMovies
+        })
+      }
+      return collection  
+    })
+ 
+    const nextState = {
+      collections: [...collectionsWithoutMovie]
+    }
+      
+    this.setState(nextState)
+    localStorage.setItem(
+      'collections',
+      JSON.stringify(nextState)
+    )
+  }
+  ratingMovies = (movieObj) => {
+    const currentRating = movieObj.rating
+    const currentMovie = movieObj.movie
+    const idCollection = movieObj.idCollection
+    const previousState = this.state
+    const collectionsWithMoviesWithRating = previousState.collections.map(collection => {
+      if (collection.id == idCollection) {
+        const favRatedMovies = collection.favMovies.map(favMovie => {
+          if (favMovie.id == currentMovie.id) {
+            return Object.assign({}, favMovie, {
+              rating: currentRating
+            })
+          }
+          return favMovie
+        })
+        return Object.assign({}, collection, {
+          favMovies: favRatedMovies
+        })
+      }
+      return collection 
+    })
+    const nextState = {
+      collections: [...collectionsWithMoviesWithRating]
+    }
+    this.setState(nextState)
+    localStorage.setItem(
+      'collections',
+      JSON.stringify(nextState)
+    )
+  }
+  ratedMovie = (paramObj) => {
+    const currentMovie = paramObj.movie
+    const idCollection = paramObj.idCollection
+    const previousState = this.state
+    console.log('previousState: ', previousState)
+    const getRating = previousState.collections.map(collection => {
+      if (collection.id == idCollection) {
+        const ratingOK = collection.favMovies.map( favMovie => {
+          if (favMovie.id == currentMovie.id) {
+            console.log('valor favMovie: ', favMovie)
+            console.log('valor favMovie.rating: ', favMovie.rating)
+            return favMovie.rating
+
+        }})
+        return ratingOK
+      }
+    })
+    console.log('valor getRating: ', getRating)
+    return getRating
+  }
+   
   render () {
     return (
       <Context.Provider value={{
         collections: this.state.collections,
         getMovies: this.getMovies,
         addCollection: this.addCollection,
-        addMovieToCollection: this.addMovieToCollection
-      }}>
+        deleteCollection: this.deleteCollection,
+        addMovieToCollection: this.addMovieToCollection,
+        deleteMovieFromCollection: this.deleteMovieFromCollection,
+        ratingMovies: this.ratingMovies,
+        ratedMovie: this.ratedMovie
+      }}> 
           <Nav/>
           <Routes/>
       </Context.Provider>
@@ -99,11 +170,6 @@ class MyMovies extends React.Component {
  
   componentWillUnmount = () => {
     localStorage.clear();
-  }
-  getMovies = (movies) => {
-    this.setState({
-      movies: movies
-    });
   }
 }
 

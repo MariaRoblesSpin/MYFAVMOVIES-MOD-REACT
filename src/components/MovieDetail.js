@@ -14,8 +14,7 @@ class MovieDetail extends React.Component {
   state = {
     loading: false, 
     error: false,
-    movie: {},
-    chose: ''
+    movie: {}
   }
   componentDidMount = async () => {
     this.setState({ loading: true })
@@ -39,12 +38,16 @@ class MovieDetail extends React.Component {
     return (
       <Context.Consumer>
         {
-          ({ addMovieToCollection }) =>
+          ({ addMovieToCollection, deleteMovieFromCollection }) =>
             <div className='movie'>
               <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
               <div className='movie__info'>
                 <h2 className='movie__title'>{movie.title}</h2>
-                <SelectCollection movie={movie} onSelect={addMovieToCollection}/>
+                <SelectCollection 
+                  movie={movie} 
+                  onSelect={addMovieToCollection} 
+                  onDelete={deleteMovieFromCollection} 
+                />
                 <p className='movie__content'>{movie.overview}</p>
               </div>
             </div>
