@@ -1,14 +1,12 @@
 import React from 'react'
 import Context from '../Context'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import NewCollection from './NewCollection'
 import MovieRating from './MovieRating'
 import './styles/RatingMovies.css'
 // var Rating = require('react-rating')
 
-library.add(faHeart)
+
 
 class SelectCollection extends React.Component {
   state = { showingForm: false, showingDelete: false, favorite: false, selectedCollection: '' }
@@ -70,7 +68,7 @@ class SelectCollection extends React.Component {
                   </form>
                 }
                 <NewCollection onSubmit={addCollection}/>
-                <FontAwesomeIcon icon='heart'  />
+                
               </>
           }
       </Context.Consumer>

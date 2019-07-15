@@ -8,6 +8,7 @@ class MyMovies extends React.Component {
   state = {
     collections: JSON.parse(localStorage.getItem('collections')) || []
   }
+
   addCollection = collection => {
     // Es necesario crear la estructura de la colección que se va a crear con una array vacío de películas favoritas dentro 
     // para poder rellenarlo a continuación.
@@ -133,7 +134,7 @@ class MyMovies extends React.Component {
     const currentMovie = paramObj.movie
     const idCollection = paramObj.idCollection
     const previousState = this.state
-    console.log('previousState: ', previousState)
+    console.log('previousState ratedMovie: ', previousState)
     let getRating = 0
     previousState.collections.map(collection => {
       if (collection.id == idCollection) {

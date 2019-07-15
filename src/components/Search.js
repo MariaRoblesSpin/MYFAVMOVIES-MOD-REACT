@@ -50,6 +50,7 @@ class SearchQuery extends React.Component {
       </>
     )
   }
+  
   hideResults = () => {
       this.setState({showingResults: false})
   }
@@ -59,6 +60,7 @@ class SearchQuery extends React.Component {
   handleChange = event => {
     this.setState({ queryToSearch: event.target.value })
   }
+  
   searchMovie = async (event) => {
     event.preventDefault();
     const query = this.state.queryToSearch.replace(/ /g, '%20')
