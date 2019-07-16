@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import CollectionContent from './CollectionContent'
 import './styles/MyCollections.css'
 class MyCollections extends React.Component {
-  state = { showingForm: false}
+  state = { showingForm: 0}
   render () { 
     const { showingForm } = this.state
     return  (
@@ -14,17 +14,16 @@ class MyCollections extends React.Component {
             <ul className='collection'>
               {
                 collections.map((collection) => (
-                  <li className='collection__item' key={collection.id}>
+                  <li className='collection__item' key={collection.id} >
                     <header className='collection__header'>
                       <h3 className='collection__title'>{collection.title}</h3>
-                      <button className='collection__button' onClick={this.showForm}>Delete Collection</button>
+                      <button id={collection.id} className='collection__button' onClick={(event) => this.showForm(event)}>Delete Collection</button>
                     </header>
                     <p className='collection__description'>{collection.description}</p>
-                    
                     {
-                      showingForm &&
+                       showingForm === collection.id && 
                         <div className='collection__message'>
-                          <p> You are going to delete the "{collection.title}" collection. Are you sure?</p>
+                          <p> You are going to delete the "{collection.title}" collection. <br/>Are you sure?</p>
                           <button className='collection__button' onClick= {(event) => {
                               event.preventDefault() 
                               this.props.onDelete(collection)
@@ -56,11 +55,12 @@ class MyCollections extends React.Component {
       
     )
   }
-  showForm = () => {
-    this.setState({showingForm: true, delete: true})
+  showForm = async (event) => {
+      await this.setState({ showingForm : parseInt(event.target.id) }) 
+      await console.log('valor de showingForm: ', this.state.showingForm)
   }
-  hideForm = () => {
-    this.setState({showingForm: false})
+  hideForm = (event) => {
+    this.setState({ showingForm: parseInt(event.target.id) + 1 })
   }
  }
 
