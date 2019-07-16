@@ -1,8 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Showcase from './Showcase'
-import Movie from './Movie'
-import { search } from '../api'
+import { withRouter } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,69 +9,43 @@ class SearchQuery extends React.Component {
   state = {
     showingForm: false,
     animate: 'staticForm',
-    queryToSearch: '',
-    results: ''
+    queryToSearch: ''
   }
   render () {
-    const { showingForm, animate, queryToSearch, showingResults, results } = this.state
+    const { showingForm, animate, queryToSearch } = this.state
     return (
-      <>
-      <form onSubmit={event => this.searchMovie(event)} className='search'>
+      <form onSubmit={this._handleSubmit} className='search'>
         <div className={animate}>
-          <FontAwesomeIcon className='search__icon' icon='search' onClick={this.showForm} />
+          <FontAwesomeIcon className='search__icon' icon='search' onClick={this._showForm} />
           {
             showingForm &&
             <>
-              <input className='search__input' placeholder="Search a favMovie" type='text' value={queryToSearch} onChange={this.handleChange}/>
+              <input className='search__input' placeholder="Search a favMovie" type='text' value={queryToSearch} onChange={this._handleChange}/>
               <button type='submit' className='search__button' disabled={!queryToSearch}>Find it!</button>
             </>
           }
         </div>
       </form>
-      {
-        showingResults &&
-        <div className='serach-results'>
-          <button onClick={this.hideResults}>Hide results</button>
-          <p>Here are the results for your search:</p>
-          <Showcase 
-            keyFn={element => element.id} 
-            elements={results} 
-            render={movie =>
-              <Link to={`/movie/${movie.id}`} onClick={this.hideResults}>
-                <Movie details={movie} />
-              </Link>
-            } 
-          />
-        </div>
-      }
-      </>
     )
   }
   
-  hideResults = () => {
+  _hideResults = () => {
       this.setState({showingResults: false})
   }
-  showForm = () => {
+  _showForm = () => {
     this.setState({ showingForm:true, animate: 'movingForm' })
   }
-  handleChange = event => {
+  _handleChange = event => {
     this.setState({ queryToSearch: event.target.value })
   }
-  
-  searchMovie = async (event) => {
+  _handleSubmit = async (event) => {
     event.preventDefault();
     const query = this.state.queryToSearch.replace(/ /g, '%20')
-    this.setState({ loading: true })
-    try {
-      const results = await search(query)
-      this.setState({ showingResults: true, results: results, loading: false })
-    } catch (error) {
-      this.setState({ error: true })
-    } finally {
-      this.setState({ loading: false })
+    if (query.trim().length > 0) {
+      this.props.history.push(`/search/${query}`)
     }
-    console.log('valor de results: ', this.state.results)
+    
   }
 }
 
-export default SearchQuery
+export default withRouter(SearchQuery)
