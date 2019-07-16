@@ -33,7 +33,7 @@ class SearchQuery extends React.Component {
       </form>
       {
         showingResults &&
-        <>
+        <div className='serach-results'>
           <button onClick={this.hideResults}>Hide results</button>
           <p>Here are the results for your search:</p>
           <Showcase 
@@ -45,7 +45,7 @@ class SearchQuery extends React.Component {
               </Link>
             } 
           />
-        </>
+        </div>
       }
       </>
     )

@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Bahiana&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Anton|Roboto&display=swap');
 .search {
     display: flex;
-    width: 60%;
+    width: 50%;
 }
 .search__icon {
     margin-right: 5px;
@@ -20,18 +20,20 @@
     border-radius: 3px;
     border: 1px solid gray;
     background-color: white;
-    font-family: 'Bahiana';
+    font-family: 'Anton', sans-serif;
     font-size: 24px;
 }
 @keyframes slideIn {
-    from {margin-left:54%}
+    from {margin-left:40%}
     to {margin-left: 7%}
 }
 .staticForm {
+    height: 35px;
+    align-items: center;
     padding: 0;
     display: flex;
     margin-top: 3px;
-    margin-left:54%;
+    margin-left:40%;
     position: absolute;
 }
 .movingForm {

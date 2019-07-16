@@ -15,8 +15,8 @@ class MyFavMovies extends React.Component {
       <Context.Consumer>
         {
           ({ addCollection, collections, deleteCollection }) =>
-          <>
-          <button className='button' onClick={this.showForm}>¡Crea una colección!</button>
+          <div className='my-fav-movies'>
+          <button className='my-fav-movies__button' onClick={this.showForm}>Create a collection!</button>
           {
             showingForm &&
             <NewCollection onSubmit={addCollection} />
@@ -27,9 +27,9 @@ class MyFavMovies extends React.Component {
             //para el caso del objeto con el id como índice.
             collections.length > 0
               ? <MyCollections details={collections} onDelete={deleteCollection} />
-              : <p className='message'>There is no collection created yet.</p>
+              : <p className='my-fav-movies__message'>There is no collection created yet.</p>
           }
-          </>
+          </div>
         }
       </Context.Consumer>
      

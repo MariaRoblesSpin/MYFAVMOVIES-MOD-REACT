@@ -1,0 +1,40 @@
+.collection {
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+.collection__header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.collection__title{
+    padding: 5px 0 0 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: 'Anton', sans-serif;
+}
+.collection__button {
+    padding: 0px 15px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    background-color: white;
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+}
+.collection__description {
+    padding: 10px 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+.collection__message {
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+}

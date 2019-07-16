@@ -8,13 +8,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import './styles/MovieDetail.css'
+import './styles/MovieDetails.css'
 library.add(faHeart)
 
 
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w342/'
 
-class MovieDetail extends React.Component {
+class MovieDetails extends React.Component {
   state = {
     loading: false, 
     error: false,
@@ -57,10 +57,12 @@ class MovieDetail extends React.Component {
         {
           ({ addMovieToCollection, deleteMovieFromCollection }) =>
             <div className='movie'>
-              <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
-              <div className='movie__info'>
-                <h2 className='movie__title'>{movie.title}</h2>
-                <SelectCollection 
+              <div className='movie__image-box'>
+                <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
+              </div>    
+              <div className='movie-info'>
+                <h1 className='movie-info__title'>{movie.title}</h1>
+                <SelectCollection
                   movie={movie} 
                   onSelect={addMovieToCollection} 
                   onDelete={deleteMovieFromCollection} 
@@ -70,7 +72,28 @@ class MovieDetail extends React.Component {
                     <FontAwesomeIcon icon='heart' />
                   }
                 </SelectCollection>
-                <p className='movie__content'>{movie.overview}</p>
+                <p className='movie-info__content'>{movie.overview}</p>
+                <div className='movie-info__genres'>
+                  <h2 className='movie-info__literal'>Genres:</h2>
+                  {
+                    movie.genres &&
+                    <ul>
+                    {
+                      movie.genres.map( genre => {
+                        return (
+                          <li key={genre.id}>
+                            {genre.name}
+                          </li>
+                        )
+                      })
+                    }
+                    </ul>
+                  }
+                </div>
+                <div className="movie-info__release_date">
+                  <h2 className='movie-info__literal'>Release Date: </h2>
+                  <p>{movie.release_date}</p>
+                </div>
               </div>
             </div>
         }
@@ -81,4 +104,4 @@ class MovieDetail extends React.Component {
   }
 }
 
-export default MovieDetail
+export default MovieDetails

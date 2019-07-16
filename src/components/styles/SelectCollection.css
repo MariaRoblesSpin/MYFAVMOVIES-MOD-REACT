@@ -1,0 +1,74 @@
+.select-collection__form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+.select-collection__select {
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 8px 12px;
+    font-size: 17px;
+    width: 82%;
+    vertical-align: middle;
+}
+.select-collection__input {
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+.select-collection__button {
+    padding: 0px 15px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    background-color: white;
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+}
+.select-collection__option {
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 15px;
+    font-family: 'Roboto';
+    vertical-align: middle;
+}
+.delete__select {
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 8px 12px;
+    font-size: 17px;
+    width: 100%;
+    vertical-align: middle;
+}
+.delete__label {
+    padding: 10px 0;
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+}
+.delete__input {
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+.delete__button {
+    padding: 0px 15px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    background-color: white;
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+}
+.delete__option {
+    border-radius: 3px;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 15px;
+    font-family: 'Roboto';
+    vertical-align: middle;
+}
+

@@ -4,6 +4,7 @@ import Showcase from './Showcase'
 import Movie from './Movie'
 import Context from '../Context'
 import { discover } from '../api'
+import './styles/NewMovies.css'
 class NewMovies extends React.Component {
   state = { 
     movies: [], 
@@ -34,7 +35,7 @@ class NewMovies extends React.Component {
         {
           ({ collections }) => 
             <>
-              <p>Discover the news</p>
+              <h1 className='new-movies__title'>Discover the news</h1>
               <Showcase 
                 keyFn={element => element.id} 
                 elements={movies} 
