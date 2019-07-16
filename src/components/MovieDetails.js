@@ -55,7 +55,7 @@ class MovieDetails extends React.Component {
     return (
       <Context.Consumer>
         {
-          ({ addMovieToCollection, deleteMovieFromCollection }) =>
+          ({ addMovieToCollection, deleteMovieFromCollection, collections }) =>
             <div className='movie'>
               <div className='movie__image-box'>
                 <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
@@ -64,6 +64,7 @@ class MovieDetails extends React.Component {
                 <h1 className='movie-info__title'>{movie.title}</h1>
                 <SelectCollection
                   movie={movie} 
+                  collections={collections}
                   onSelect={addMovieToCollection} 
                   onDelete={deleteMovieFromCollection} 
                 >

@@ -18,10 +18,18 @@ class SelectCollection extends React.Component {
         {
           ({ collections, addCollection, ratingMovies, ratedMovie }) => 
             <div className='select-collection'> 
-
-              <button className='select-collection__button' onClick={this.showForm}>
-                Add to favMovies
-              </button>
+              {/* {
+                console.log('valor de la funcion getFavMovie: ', this.getFavMovie(this.props.movie, collections) )
+             
+              } */}
+              {
+                favorite
+                ? <div>This is a favMovie!!!</div>
+                : <button className='select-collection__button' onClick={this.showForm}>
+                    Add to favMovies
+                  </button> 
+              }
+              
               { showingForm &&
                   <form className='select-collection__form' onSubmit={this._handleSubmit}>
                     <select className='select-collection__select' name='addToCollection' value={this.state.value} onChange={this._handleSelect}>
@@ -66,11 +74,19 @@ class SelectCollection extends React.Component {
                     <button className='delete__button' type='submit' >Delete</button>
                   </form>
                 }
-                <NewCollection onSubmit={addCollection}/>
+                {
+                  favorite 
+                  ? <span></span>
+                  : <NewCollection onSubmit={addCollection}/> 
+                }
+                
               </div>
           }
       </Context.Consumer>
     )
+  }
+  componentDidMount = () => {
+    this.getFavMovie(this.props.movie, this.props.collections)
   }
   showForm = () => {
     this.setState({ showingForm: true })
@@ -103,7 +119,18 @@ class SelectCollection extends React.Component {
     const movie = this.props.movie
     this.props.onDelete({ value, movie })
   }
-  
+  getFavMovie = ( currentMovie, collections ) => {
+    collections.map(collection => {
+      const favMovies = collection.favMovies
+      const favMovie = favMovies.find(({ id }) => id === currentMovie.id)
+      console.log('valor find de favMovie: ', favMovie) 
+      if (favMovie) {
+        this.setState({ favorite: true })
+      } else {
+        this.setState({ favorite: false })
+      }
+    })
+  }
 }
 
 export default SelectCollection
