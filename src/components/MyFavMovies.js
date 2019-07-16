@@ -20,7 +20,6 @@ class MyFavMovies extends React.Component {
           {
             showingForm &&
             <NewCollection onSubmit={addCollection} />
-            
           }
           {
             //lengthObject > 0 

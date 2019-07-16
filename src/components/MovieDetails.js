@@ -4,12 +4,10 @@ import Context from '../Context'
 
 import SelectCollection from './SelectCollection'
 import { movie } from '../api'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 import './styles/MovieDetails.css'
-library.add(faHeart)
+
 
 
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w342/'
@@ -65,10 +63,7 @@ class MovieDetails extends React.Component {
                   onSelect={addMovieToCollection} 
                   onDelete={deleteMovieFromCollection} 
                 >
-                  {
-                    this.state.favorite &&
-                    <FontAwesomeIcon icon='heart' />
-                  }
+                  
                 </SelectCollection>
                 <p className='movie-info__content'>{movie.overview}</p>
                 <div className='movie-info__genres'>

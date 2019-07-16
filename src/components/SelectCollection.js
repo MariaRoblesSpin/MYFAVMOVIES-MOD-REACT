@@ -5,14 +5,17 @@ import NewCollection from './NewCollection'
 import MovieRating from './MovieRating'
 import './styles/RatingMovies.css'
 import './styles/SelectCollection.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // var Rating = require('react-rating')
-
+library.add(faHeart)
 
 
 class SelectCollection extends React.Component {
-  state = { showingForm: false, showingDelete: false, favorite: false, idCollection: '' }
+  state = { showingForm: false, showingDelete: false, showingNew: false, favorite: false, idCollection: '' }
   render () {
-    const { showingForm, showingDelete, favorite } = this.state
+    const { showingForm, showingDelete, showingNew, favorite } = this.state
     return (
       <Context.Consumer>
         {
@@ -20,10 +23,19 @@ class SelectCollection extends React.Component {
             <div className='select-collection'> 
               {
                 favorite
-                ? <div>This is a favMovie!!!</div>
-                : <button className='select-collection__button' onClick={this.showForm}>
-                    Add to favMovies
-                  </button> 
+                ? 
+                <>
+                  <FontAwesomeIcon icon='heart' />
+                  <div>This is a favMovie!!!</div>
+                </>
+                : 
+                    collections.length === 0 
+                    ? <span>You have to create a collection first!</span>
+                    : <button className='select-collection__button' onClick={this.showForm}>
+                        Add to favMovies
+                      </button> 
+                
+                  
               }
               
               { showingForm &&
@@ -73,7 +85,13 @@ class SelectCollection extends React.Component {
                 {
                   favorite 
                   ? <span></span>
-                  : <NewCollection onSubmit={addCollection}/> 
+                  : <>
+                    <button className='my-fav-movies__button' onClick={this.showNew}>Create a collection!</button>
+                    {
+                      showingNew &&
+                      <NewCollection onSubmit={addCollection} />
+                    }
+                    </> 
                 }
                 
               </div>
@@ -88,13 +106,15 @@ class SelectCollection extends React.Component {
   showForm = () => {
     this.setState({ showingForm: true })
   }
+  showNew = () => {
+    this.setState({ showingNew: true })
+  }
   hideForm = () => {
     this.setState({ showingForm: false })
   }
   hideDelete = () => {
     this.setState({ showingDelete: false })
   }
-
   _handleSelect = (event) => {
     this.setState({ value: event.target.value })
   }
