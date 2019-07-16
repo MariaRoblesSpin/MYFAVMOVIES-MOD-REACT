@@ -32,16 +32,13 @@ class MovieDetails extends React.Component {
     }
   }
   componentWillUpdate = async (prevProps, prevState) => {
-    console.log('valor de prevstate.movie.id : ', prevState.movie.id)
-    console.log('valor de this.props.match.params.id : ', this.props.match.params.id)
     const results = await movie(this.props.match.params.id);
     if (prevState.movie.id === undefined) {
-      console.log('pasa por prevState.movie.id undefined')
+      return
     } else if (prevState.movie.id != this.props.match.params.id) {
       this.setState({ movie: results })
-      console.log('pasa por valores diferentes ')
     } else {
-      console.log('pasa por else')
+      return
     }
   }
    render () {

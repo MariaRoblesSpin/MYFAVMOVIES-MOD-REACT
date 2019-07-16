@@ -2,7 +2,9 @@ import React from 'react'
 import Rating from 'react-rating'
 
 class MovieRating extends React.Component {
-  state = { }
+  state = {
+    rating: 0
+  }
   render () {
     const { rating } = this.state
     return (
@@ -17,9 +19,12 @@ class MovieRating extends React.Component {
       />  
     )
   }
+  componentDidMount = () => {
+    this.ratedMovie(this.props.movie, this.props.collections)
+  }
   componentWillUpdate = (nextProps, nextState) => {
-    console.log('valor prevState: ', nextState)
-    console.log('valor this.state: ', this.state)
+    // console.log('valor prevState: ', nextState)
+    // console.log('valor this.state: ', this.state)
     if (nextState.rating != this.state.rating) {
       this.setState({ rating: nextState.rating })
     }
@@ -27,23 +32,26 @@ class MovieRating extends React.Component {
   _handleRating = (value) => {
     try {
       console.log('valor de value en handlerating: ', value)
-      const { rating } = this.state 
+      const rating = value
       const movie = this.props.movie
       const idCollection = this.props.idCollection
-      // De esta manera no funciona el on rating (llega el dato con un click de retraso), y tampoco funciona el rate
-      
-      // callback de this props rate y onrating para resolver los problemas de asincronía del setState
-      this.setState({ rating: value }, () => {
-        this.props.rate({ movie, idCollection })
-    })
-      this.props.onRating({ rating, movie, idCollection })
+      // problema: graba el valor de rating al segundo click y en ningún momento lo recupera en este componente aunque le paso la función ratedMovie
       console.log('valor de rating en handlerating: ', rating)
-      console.log('valor de movie en handlerating: ', movie)
-      console.log('valor de idCollection en handlerating: ', idCollection)
-      // this.props.rate({ movie, idCollection })
+      this.setState({ rating: value })
+      this.props.onRating({ rating, movie, idCollection })
     } catch (error) {
       console.log('error in handleRating: ', error)
     }
+  }
+  ratedMovie = (currentMovie, collections) => {
+    collections.map(collection => {
+        collection.favMovies.map( favMovie => {
+          if (favMovie.id == currentMovie.id) {
+            console.log('valor favMovie.rating: ', favMovie.rating)
+            const getRating = favMovie.rating
+            this.setState({ rating: getRating})
+        }})
+      })
   }
 }
 

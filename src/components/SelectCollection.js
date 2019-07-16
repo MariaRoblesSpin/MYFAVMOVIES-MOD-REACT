@@ -16,7 +16,7 @@ class SelectCollection extends React.Component {
     return (
       <Context.Consumer>
         {
-          ({ collections, addCollection, ratingMovies, ratedMovie }) => 
+          ({ collections, addCollection, ratingMovies }) => 
             <div className='select-collection'> 
               {/* {
                 console.log('valor de la funcion getFavMovie: ', this.getFavMovie(this.props.movie, collections) )
@@ -49,9 +49,9 @@ class SelectCollection extends React.Component {
                   favorite && 
                     <MovieRating 
                       movie={this.props.movie} 
+                      collections={collections}
                       idCollection={this.state.selectedCollection}
                       onRating={ratingMovies} 
-                      rate={ratedMovie}
                     />      
                 }
                 {
