@@ -118,6 +118,7 @@ class SelectCollection extends React.Component {
     const { value } = this.state
     const movie = this.props.movie
     this.props.onDelete({ value, movie })
+    this.setState({ favorite: false, showingDelete:false })
   }
   getFavMovie = ( currentMovie, collections ) => {
     collections.map(collection => {
