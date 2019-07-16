@@ -102,8 +102,11 @@ class MyMovies extends React.Component {
   }
   ratingMovies = (movieObj) => {
     const currentRating = movieObj.rating
+    console.log('valor current rating en rating movies: ', currentRating)
     const currentMovie = movieObj.movie
+    console.log('valor current movie en rating movies: ', currentMovie)
     const idCollection = movieObj.idCollection
+    console.log('valor idCollection en rating movies: ', idCollection)
     const previousState = this.state
     const collectionsWithMoviesWithRating = previousState.collections.map(collection => {
       if (collection.id == idCollection) {
@@ -124,6 +127,8 @@ class MyMovies extends React.Component {
     const nextState = {
       collections: [...collectionsWithMoviesWithRating]
     }
+    // problema: no actualiza este estado la segunda vez aunque recibe bien los parámetros 
+    console.log('valor de nextstate en rating movies: ', nextState)
     this.setState(nextState)
     localStorage.setItem(
       'collections',

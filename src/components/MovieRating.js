@@ -13,8 +13,7 @@ class MovieRating extends React.Component {
         // fullSymbol='fa fa-star fa-2x' 
         initialRating={rating}
         direction='ltr' 
-        onChange={this._handleRating}
-        // onChange={rate => alert(rate)}
+        onClick={this._handleRating}
         value={rating}
       />  
     )
@@ -25,9 +24,9 @@ class MovieRating extends React.Component {
   componentWillUpdate = (nextProps, nextState) => {
     // console.log('valor prevState: ', nextState)
     // console.log('valor this.state: ', this.state)
-    if (nextState.rating != this.state.rating) {
-      this.setState({ rating: nextState.rating })
-    }
+    // if (nextState.rating != this.state.rating) {
+    //   this.setState({ rating: nextState.rating })
+    // }
   }
   _handleRating = (value) => {
     try {
@@ -38,6 +37,7 @@ class MovieRating extends React.Component {
       // problema: graba el valor de rating al segundo click y en ningún momento lo recupera en este componente aunque le paso la función ratedMovie
       console.log('valor de rating en handlerating: ', rating)
       this.setState({ rating: value })
+      console.log('valor de rating tras setState en handlerating: ', rating)
       this.props.onRating({ rating, movie, idCollection })
     } catch (error) {
       console.log('error in handleRating: ', error)

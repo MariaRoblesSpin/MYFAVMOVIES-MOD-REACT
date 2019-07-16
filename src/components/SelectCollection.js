@@ -10,7 +10,7 @@ import './styles/SelectCollection.css'
 
 
 class SelectCollection extends React.Component {
-  state = { showingForm: false, showingDelete: false, favorite: false, selectedCollection: '' }
+  state = { showingForm: false, showingDelete: false, favorite: false, idCollection: '' }
   render () {
     const { showingForm, showingDelete, favorite } = this.state
     return (
@@ -18,10 +18,6 @@ class SelectCollection extends React.Component {
         {
           ({ collections, addCollection, ratingMovies }) => 
             <div className='select-collection'> 
-              {/* {
-                console.log('valor de la funcion getFavMovie: ', this.getFavMovie(this.props.movie, collections) )
-             
-              } */}
               {
                 favorite
                 ? <div>This is a favMovie!!!</div>
@@ -50,7 +46,7 @@ class SelectCollection extends React.Component {
                     <MovieRating 
                       movie={this.props.movie} 
                       collections={collections}
-                      idCollection={this.state.selectedCollection}
+                      idCollection={this.state.idCollection}
                       onRating={ratingMovies} 
                     />      
                 }
@@ -85,8 +81,9 @@ class SelectCollection extends React.Component {
       </Context.Consumer>
     )
   }
-  componentDidMount = () => {
-    this.getFavMovie(this.props.movie, this.props.collections)
+  componentDidMount = async () => {
+    await this.getIdCollection(this.props.movie, this.props.collections)
+    await this.getFavMovie(this.props.movie, this.state.idCollection, this.props.collections)
   }
   showForm = () => {
     this.setState({ showingForm: true })
@@ -109,7 +106,7 @@ class SelectCollection extends React.Component {
       showingDelete: true,
       showingForm: false,
       favorite: true,
-      selectedCollection: value
+      idCollection: value
     })
     this.props.onSelect({ value, movie })
   }
@@ -120,16 +117,26 @@ class SelectCollection extends React.Component {
     this.props.onDelete({ value, movie })
     this.setState({ favorite: false, showingDelete:false })
   }
-  getFavMovie = ( currentMovie, collections ) => {
+  getFavMovie = ( currentMovie, idCollection, collections ) => {
     collections.map(collection => {
-      const favMovies = collection.favMovies
-      const favMovie = favMovies.find(({ id }) => id === currentMovie.id)
-      console.log('valor find de favMovie: ', favMovie) 
-      if (favMovie) {
-        this.setState({ favorite: true })
-      } else {
-        this.setState({ favorite: false })
+      if ( collection.id === idCollection) {
+        const favMovies = collection.favMovies
+        const favMovie = favMovies.find(({ id }) => id === currentMovie.id)
+        console.log('valor find de favMovie en getFavMovie: ', favMovie) 
+        if (favMovie) {
+          this.setState({ favorite: true })
+        } else {
+          this.setState({ favorite: false })
+        }
       }
+    })
+  }
+  getIdCollection = ( currentMovie, collections ) => {
+    collections.map( collection => {
+      if (collection.favMovies.find(({ id }) => id === currentMovie.id)) {
+        console.log('valor de idCollection: ', collection.id)
+        this.setState({ idCollection: collection.id })
+      } 
     })
   }
 }
