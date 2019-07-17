@@ -77,7 +77,7 @@ class MyMovies extends React.Component {
     )
   }
   deleteMovieFromCollection = idCollectionObj => {
-    const selectedCollection = idCollectionObj.value
+    const selectedCollection = idCollectionObj.idCollection
     const currentMovie = idCollectionObj.movie
     const previousState = this.state
     const collectionsWithoutMovie = previousState.collections.map( collection => {

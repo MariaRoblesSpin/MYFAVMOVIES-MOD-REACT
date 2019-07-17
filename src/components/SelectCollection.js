@@ -57,24 +57,11 @@ class SelectCollection extends React.Component {
                       collections={collections}
                       idCollection={this.state.idCollection}
                       onRating={ratingMovies} 
-                    />   
-                    <form className='select-collection__form' onSubmit={this._handleDelete}>
-                    <label className='delete__label'>
-                    Delete Movie from collection
-                      <select className='delete__select' name='deleteFromCollection' value={this.state.value} onChange={this._handleDelete}>
-                        <option className='delete__option' value='0'>Chose a collection</option>
-                          {
-                            collections.map(collection =>
-                              <option className='delete__option' value={collection.id} key={collection.id}>
-                                {collection.title}
-                              </option>
-                            )
-                          }
-                      </select>
-                    </label>
-                    <button className='delete__button' onClick={this.hideDelete}>Noooo!!!</button>
-                    <button className='delete__button' type='submit' >Delete</button>
-                  </form>
+                    />
+                    <p>This movie belongs to <strong>{this.state.idCollection}</strong> collection.</p>   
+                    <form className='select-collection__form' onSubmit={this._handleSubmitDelete}>
+                      <button className='delete__button' type='submit' >Delete from {this.state.idCollection} collection</button>
+                    </form>
                   </>   
                 }
 
@@ -119,19 +106,22 @@ class SelectCollection extends React.Component {
     const { value } = this.state
     const movie = this.props.movie
     this.setState({ 
-      showingDelete: true,
       showingForm: false,
       favorite: true,
       idCollection: value
     })
     this.props.onSelect({ value, movie })
   }
-  _handleDelete = (event) => {
+  _handleSubmitDelete = (event) => {
     event.preventDefault()
-    const { value } = this.state
+    const idCollection = this.state.idCollection
     const movie = this.props.movie
-    this.props.onDelete({ value, movie })
-    this.setState({ favorite: false, showingDelete:false })
+    this.props.onDelete({ idCollection, movie })
+    this.setState({ 
+      favorite: false, 
+      showingDelete:false
+     })
+    console.log('valor de la idCollection en el state: ', idCollection)
   }
   getFavMovie = ( currentMovie, idCollection, collections ) => {
     collections.map(collection => {
