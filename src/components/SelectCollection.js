@@ -34,10 +34,7 @@ class SelectCollection extends React.Component {
                     : <button className='select-collection__button' onClick={this.showForm}>
                         Add to favMovies
                       </button> 
-                
-                  
               }
-              
               { showingForm &&
                   <form className='select-collection__form' onSubmit={this._handleSubmit}>
                     <select className='select-collection__select' name='addToCollection' value={this.state.value} onChange={this._handleSelect}>
@@ -55,16 +52,14 @@ class SelectCollection extends React.Component {
                 }
                 {
                   favorite && 
+                    <>
                     <MovieRating 
                       movie={this.props.movie} 
                       collections={collections}
                       idCollection={this.state.idCollection}
                       onRating={ratingMovies} 
-                    />      
-                }
-                {
-                  showingDelete &&
-                  <form className='select-collection__form' onSubmit={this._handleDelete}>
+                    />   
+                    <form className='select-collection__form' onSubmit={this._handleDelete}>
                     <label className='delete__label'>
                     Delete Movie from collection
                       <select className='delete__select' name='deleteFromCollection' value={this.state.value} onChange={this._handleDelete}>
@@ -81,7 +76,9 @@ class SelectCollection extends React.Component {
                     <button className='delete__button' onClick={this.hideDelete}>Noooo!!!</button>
                     <button className='delete__button' type='submit' >Delete</button>
                   </form>
+                  </>   
                 }
+
                 {
                   favorite 
                   ? <span></span>
