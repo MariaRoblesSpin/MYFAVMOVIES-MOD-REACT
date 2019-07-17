@@ -8,14 +8,13 @@ import './styles/SelectCollection.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// var Rating = require('react-rating')
 library.add(faHeart)
 
 
 class SelectCollection extends React.Component {
   state = { showingForm: false, showingDelete: false, showingNew: false, favorite: false, idCollection: '' }
   render () {
-    const { showingForm, showingDelete, showingNew, favorite } = this.state
+    const { showingForm, showingNew, favorite } = this.state
     return (
       <Context.Consumer>
         {
