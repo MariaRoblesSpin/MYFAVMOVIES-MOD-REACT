@@ -19,7 +19,6 @@ class SearchResults extends React.Component {
     } finally {
       this.setState({ loading: false })
     }
-    console.log('valor de results: ', this.state.results)
   }
   render () {
     const { movies = [] } = this.state

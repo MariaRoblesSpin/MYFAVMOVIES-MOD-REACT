@@ -112,16 +112,12 @@ class SelectCollection extends React.Component {
     event.preventDefault()
     const { value } = this.state
     const movie = this.props.movie
-    
-    console.log('valor de value: ', value)
-    console.log('valor de expresion value: ', value != undefined)
     if (value != undefined) {
       this.setState({ 
-      showingForm: false,
-      favorite: true,
-      idCollection: value
-    })
-      console.log('entra por value')
+        showingForm: false,
+        favorite: true,
+        idCollection: value
+      })
       this.props.onSelect({ value, movie })
     }
   }
@@ -134,14 +130,12 @@ class SelectCollection extends React.Component {
       favorite: false, 
       showingDelete:false
      })
-    console.log('valor de la idCollection en el state: ', idCollection)
   }
   _getFavMovie = ( currentMovie, idCollection, collections ) => {
     collections.map(collection => {
       if ( collection.id === idCollection) {
         const favMovies = collection.favMovies
         const favMovie = favMovies.find(({ id }) => id === currentMovie.id)
-        console.log('valor find de favMovie en getFavMovie: ', favMovie) 
         if (favMovie) {
           this.setState({ favorite: true })
         } else {
@@ -153,7 +147,6 @@ class SelectCollection extends React.Component {
   _getIdCollection = ( currentMovie, collections ) => {
     collections.map( collection => {
       if (collection.favMovies.find(({ id }) => id === currentMovie.id)) {
-        console.log('valor de idCollection: ', collection.id)
         this.setState({ idCollection: collection.id })
       } 
     })
@@ -161,7 +154,6 @@ class SelectCollection extends React.Component {
   _getNameCollection =  ( currentMovie, collections ) => {
     collections.map( collection => {
       if (collection.favMovies.find(({ id }) => id === currentMovie.id)) {
-        console.log('valor de nameCollection: ', collection.title)
         this.setState({ nameCollection: collection.title})
       } 
     })
