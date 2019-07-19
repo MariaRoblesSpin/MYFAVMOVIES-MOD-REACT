@@ -29,12 +29,8 @@ class MyMovies extends React.Component {
       const alreadyCreated = previousState.collections.find(({ title }) => title == newCollection.title)
     
       if (!alreadyCreated) {
-        this.setState(nextState)
+        this._setNewStateAndStorage(nextState)
         this.setState({ showingNew: false })
-        localStorage.setItem(
-          'collections',
-          JSON.stringify(nextState)
-        )
       }
     } else {
       nextState = {
@@ -42,12 +38,8 @@ class MyMovies extends React.Component {
           newCollection
         ]
       }
-      this.setState(nextState)
-        this.setState({ showingNew: false })
-        localStorage.setItem(
-          'collections',
-          JSON.stringify(nextState)
-        )
+      this._setNewStateAndStorage(nextState)
+      this.setState({ showingNew: false })
     }
   }
   
@@ -57,11 +49,7 @@ class MyMovies extends React.Component {
       ...previousState, 
       collections: previousState.collections.filter(({title}) => title != collection.title )
     }
-    this.setState(nextState)
-    localStorage.setItem(
-      'collections',
-      JSON.stringify(nextState)
-    )
+    this._setNewStateAndStorage(nextState)
   }
   addMovieToCollection = idCollectionObj => {
     const selectedCollection = idCollectionObj.value
@@ -80,13 +68,7 @@ class MyMovies extends React.Component {
     const nextState = {
       collections: [...newCollections]
     }
-      
-    this.setState(nextState)
-    localStorage.setItem(
-      'collections',
-      JSON.stringify(nextState)
-    )
-    
+    this._setNewStateAndStorage(nextState)
   }
   deleteMovieFromCollection = idCollectionObj => {
     const selectedCollection = idCollectionObj.idCollection
@@ -105,20 +87,12 @@ class MyMovies extends React.Component {
     const nextState = {
       collections: [...collectionsWithoutMovie]
     }
-      
-    this.setState(nextState)
-    localStorage.setItem(
-      'collections',
-      JSON.stringify(nextState)
-    )
+    this._setNewStateAndStorage(nextState)
   }
   ratingMovies = (movieObj) => {
     const currentRating = movieObj.rating
-    console.log('valor current rating en rating movies: ', currentRating)
     const currentMovie = movieObj.movie
-    console.log('valor current movie en rating movies: ', currentMovie)
     const idCollection = movieObj.idCollection
-    console.log('valor idCollection en rating movies: ', idCollection)
     const previousState = this.state
     const collectionsWithMoviesWithRating = previousState.collections.map(collection => {
       if (collection.id == idCollection) {
@@ -139,16 +113,17 @@ class MyMovies extends React.Component {
     const nextState = {
       collections: [...collectionsWithMoviesWithRating]
     }
-    // problema: no actualiza este estado la segunda vez aunque recibe bien los parámetros 
-    console.log('valor de nextstate en rating movies: ', nextState)
-    this.setState(nextState)
+    this._setNewStateAndStorage(nextState)
+  }
+
+  _setNewStateAndStorage = newContent => {
+    this.setState(newContent)
     localStorage.setItem(
       'collections',
-      JSON.stringify(nextState)
+      JSON.stringify(newContent)
     )
   }
   
-   
   render () {
     return (
       <Context.Provider value={{
@@ -166,7 +141,5 @@ class MyMovies extends React.Component {
     )
   }
 }
-
-
 
 export default MyMovies
