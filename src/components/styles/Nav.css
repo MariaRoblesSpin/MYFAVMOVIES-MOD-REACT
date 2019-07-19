@@ -10,6 +10,11 @@
     font-family: 'Anton', sans-serif;
     font-size: 30px;
 }
+@media (max-width: 762px){ 
+    .navbar {
+        font-size: 20px;
+    }
+}
 .menu {
     list-style: none;
     display: flex;

@@ -25,16 +25,17 @@
     font-size: 24px;
 }
 @keyframes slideIn {
-    from {margin-left:40%}
+    from {margin-left:45%}
     to {margin-left: 7%}
 }
+
 .staticForm {
     height: 35px;
     align-items: center;
     padding: 0;
     display: flex;
     margin-top: 3px;
-    margin-left:40%;
+    margin-left:45%;
     position: absolute;
 }
 .movingForm {
@@ -43,10 +44,28 @@
     margin-top: 3px;
     margin-left: 7%;
     position: absolute;
-    width: 500px;
+    width: 50%;
     animation-name: slideIn;
     animation-duration: 1s;
-    animation-timing-function: cubic-bezier();
+    animation-timing-function: ease-in-out;
+}
+@media (max-width: 762px){ 
+    @keyframes slideIn {
+        from {margin-left:45%}
+        to {margin-left: -4%}
+    }
+    .staticForm {
+        height: 20px;
+    }
+    .movingForm {
+        width: 60%;
+        margin-left: -4%;
+        height: 28px;
+    }
+    .search__button, 
+    .search__button:disabled {
+        font-size: 18px;
+    }
 }
 .search-results {
     width: 100%;

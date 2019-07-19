@@ -25,10 +25,10 @@ class NewMovies extends React.Component {
   render () {
     const { movies, loading, error } = this.state
     if (loading) {
-      return <p>Loading... </p>
+      return <p className='movie__message'>Loading... </p>
     }
     if (error) {
-      return <p>Error 500!</p>
+      return <p className='movie__message'>Error 500!</p>
     }
     return (
       <Context.Consumer>

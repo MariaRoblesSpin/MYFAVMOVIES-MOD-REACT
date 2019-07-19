@@ -18,6 +18,7 @@ class MovieDetails extends React.Component {
     error: false,
     movie: {}
   }
+  
   componentDidMount = async () => {
     this.setState({ loading: true })
     try {
@@ -42,15 +43,16 @@ class MovieDetails extends React.Component {
    render () {
     const { loading, error, movie } = this.state
     if (loading) {
-      return <p>Loading...</p>
+      return <p className='movie__message'>Loading...</p>
     }
     if (error) {
-      return <p>Something went wrong... error 500!</p>
+      return <p className='movie__message'>Something went wrong... error 500!</p>
     }
     return (
       <Context.Consumer>
         {
           ({ addMovieToCollection, deleteMovieFromCollection, collections }) =>
+            
             <div className='movie'>
               <div className='movie__image-box'>
                 <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />

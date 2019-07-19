@@ -31,3 +31,10 @@
     font-weight: 500;
     margin-bottom: 0px;
 }
+.movie__message {
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+}

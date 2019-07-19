@@ -30,7 +30,7 @@ class SearchQuery extends React.Component {
   }
   
   _hideResults = () => {
-      this.setState({showingResults: false})
+      this.setState({showingForm: false, animate: 'staticForm'})
   }
   _showForm = () => {
     this.setState({ showingForm:true, animate: 'movingForm' })
@@ -40,11 +40,11 @@ class SearchQuery extends React.Component {
   }
   _handleSubmit = async (event) => {
     event.preventDefault();
-    const query = this.state.queryToSearch.replace(/ /g, '%20')
+    const query = this.state.queryToSearch
     if (query.trim().length > 0) {
       this.props.history.push(`/search/${query}`)
     }
-    
+    this._hideResults()
   }
 }
 

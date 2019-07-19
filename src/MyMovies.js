@@ -26,7 +26,7 @@ class MyMovies extends React.Component {
           ...previousState.collections
         ]
       }
-      const alreadyCreated = previousState.collections.find(({ title }) => title === newCollection.title)
+      const alreadyCreated = previousState.collections.find(({ title }) => title == newCollection.title)
     
       if (!alreadyCreated) {
         this.setState(nextState)
