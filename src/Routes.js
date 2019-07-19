@@ -6,6 +6,8 @@ import NewMovies from './components/NewMovies'
 import MovieDetails from './components/MovieDetails'
 import SearchResults from './components/SearchResults'
 
+import './components/styles/Error.css'
+
 export default () =>
 <Switch>
   <Route exact path='/' component={NewMovies} />
@@ -15,13 +17,6 @@ export default () =>
       const { query } = match.params
       return <SearchResults key={query} query={query} />
     }} />
-  <Route component={() => <p>Error 404, we can't find what you're looking for</p>} />
+  <Route component={() => <main><p className='error__message'><span className='error__message--bigger'>Error 404</span><br/>Upssssss, we can't find what you're looking for</p></main>} />
 </Switch>
 
-export const routes = {
-  popularMovies: () => '/',
-  movieDetails: movieId => `/movie/${movieId}`,
-  searchResults: query => `/search/${query}`,
-  movieCollections: () => '/collections',
-  collectionDetails: collectionId => `/collections/${collectionId}`
-}

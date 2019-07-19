@@ -31,10 +31,15 @@
     box-sizing: border-box;
     font-size: 20px;
 }
-.message {
+.collection__message {
     padding: 0 20px;
+    margin: 0;
     box-sizing: border-box;
+    width: 100%;
     font-size: 20px;
     text-align: center;
     font-family: 'Anton', sans-serif;
+}
+.collection__message button {
+    margin: 0 10px 20px 10px;
 }

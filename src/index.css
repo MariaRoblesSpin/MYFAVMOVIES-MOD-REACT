@@ -24,12 +24,16 @@ button {
   font-weight: 100;
   font-family: 'Anton', sans-serif;
 }
-button:focus {
+button:focus, 
+input:focus, 
+textarea:focus,
+select:focus,
+option:focus {
   outline: 0px ;
-  box-shadow: 0px 2px 5px orange;
+  box-shadow: 0px 2px 5px lightgray;
 }
 button:hover {
-  color: rgb(240, 212, 161);
+  color: #dfdfdf;
 }
 a:focus {
   outline: 0px ;

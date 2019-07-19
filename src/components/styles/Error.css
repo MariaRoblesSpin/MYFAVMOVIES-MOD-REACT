@@ -1,0 +1,10 @@
+.error__message {
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+}
+.error__message--bigger {
+    font-size: 40px;
+}
