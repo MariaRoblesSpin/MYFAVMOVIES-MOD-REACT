@@ -26,29 +26,29 @@ class SearchResults extends React.Component {
     const noMovies = movies.length === 0
     if (noMovies) {
     return (
-      <>
-        <p>Sorry! ...there are no movies for your search.</p>
+      <main className='search-results'>
+        <p className='search-results__message'>Sorry! ...there are no movies for your search.</p>
         <button className='collection__button'> 
-          <Link to='./'>
+          <Link to='/'>
             Go to movies!
           </Link> 
         </button>
-      </>
+      </main>
       )
     } else {
       return (
-        <>
-        <p>Here are the results for your search:</p>
-        <Showcase 
-          keyFn={element => element.id} 
-          elements={movies} 
-          render={movie =>
-            <Link to={`/movie/${movie.id}`}>
-              <Movie details={movie} />
-            </Link>
-          } 
-        />
-      </>
+        <main className='search-results'>
+          <p className='search-results__message'>Here are the results for your search:</p>
+          <Showcase 
+            keyFn={element => element.id} 
+            elements={movies} 
+            render={movie =>
+              <Link to={`/movie/${movie.id}`}>
+                <Movie details={movie} />
+              </Link>
+            } 
+          />
+        </main>
       )
     }
   }

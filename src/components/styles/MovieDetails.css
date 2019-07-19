@@ -1,11 +1,10 @@
 .movie {
     list-style: none;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin: 20px 5%;
-    padding: 0;
+    padding: 20px 5%;
     box-sizing: border-box;
 }
 .movie__image-box {

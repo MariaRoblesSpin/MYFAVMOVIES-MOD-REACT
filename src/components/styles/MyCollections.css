@@ -19,20 +19,20 @@
     font-family: 'Anton', sans-serif;
 }
 .collection__button {
-    padding: 0px 15px;
-    border-radius: 3px;
-    border: 1px solid gray;
-    background-color: white;
-    font-family: 'Anton', sans-serif;
     font-size: 24px;
+    color: white !important;
 }
+.collection__button a:link, .collection__button a:active, .collection__button a {
+    font-size: 24px;
+    color: white !important;
+} 
 .collection__description {
-    padding: 10px 0;
+    padding: 0;
     box-sizing: border-box;
     font-size: 20px;
 }
-.collection__message {
-    padding: 20px;
+.message {
+    padding: 0 20px;
     box-sizing: border-box;
     font-size: 20px;
     text-align: center;

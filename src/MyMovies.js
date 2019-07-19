@@ -8,10 +8,7 @@ class MyMovies extends React.Component {
   state = {
     collections: JSON.parse(localStorage.getItem('collections')) || []
   }
-
   addCollection = collection => {
-    // Es necesario crear la estructura de la colección que se va a crear con una array vacío de películas favoritas dentro 
-    // para poder rellenarlo a continuación.
     collection.id = Date.now().valueOf()
     const previousState = this.state
     const newCollection= {
@@ -20,21 +17,37 @@ class MyMovies extends React.Component {
       description: collection.description,
       favMovies: []
     }
-    const nextState = {
+    let nextState = {}
+    
+    if (previousState.collections.length > 0) {
+      nextState = {
         collections: [
           newCollection,
           ...previousState.collections
         ]
       }
+      const alreadyCreated = previousState.collections.find(({ title }) => title === newCollection.title)
     
-    const alreadyCreated = previousState.collections.find(({ title }) => title === newCollection.title)
-    
-    if (!alreadyCreated) {
+      if (!alreadyCreated) {
+        this.setState(nextState)
+        this.setState({ showingNew: false })
+        localStorage.setItem(
+          'collections',
+          JSON.stringify(nextState)
+        )
+      }
+    } else {
+      nextState = {
+        collections: [
+          newCollection
+        ]
+      }
       this.setState(nextState)
-      localStorage.setItem(
-        'collections',
-        JSON.stringify(nextState)
-      )
+        this.setState({ showingNew: false })
+        localStorage.setItem(
+          'collections',
+          JSON.stringify(nextState)
+        )
     }
   }
   
@@ -44,8 +57,6 @@ class MyMovies extends React.Component {
       ...previousState, 
       collections: previousState.collections.filter(({title}) => title != collection.title )
     }
-    // const nextState = previousState.collections.filter(({title}) => title != collection.title )
-    // esta línea no actualiza el componente... sin embargo con el spread sí funciona...
     this.setState(nextState)
     localStorage.setItem(
       'collections',
@@ -152,10 +163,6 @@ class MyMovies extends React.Component {
           <Routes/>
       </Context.Provider>
     )
-  }
- 
-  componentWillUnmount = () => {
-    localStorage.clear();
   }
 }
 

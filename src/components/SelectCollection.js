@@ -3,7 +3,7 @@ import Context from '../Context'
 
 import NewCollection from './NewCollection'
 import MovieRating from './MovieRating'
-import './styles/RatingMovies.css'
+import './styles/MovieRating.css'
 import './styles/SelectCollection.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -25,16 +25,16 @@ class SelectCollection extends React.Component {
                 ? 
                 <>
                   <FontAwesomeIcon icon='heart' />
-                  <div>This is a favMovie!!!</div>
+                  <p className='select-collection__fav-movie'>This is a favMovie!!!</p>
                 </>
                 : 
                     collections.length === 0 
-                    ? <span>You have to create a collection first!</span>
+                    ? <p>You have to create a collection first!</p>
                     : <button className='select-collection__button' onClick={this.showForm}>
                         Add to favMovies
                       </button> 
               }
-              { showingForm &&
+              { (showingForm && collections.length > 0) &&
                   <form className='select-collection__form' onSubmit={this._handleSubmit}>
                     <select className='select-collection__select' value={this.state.value} onChange={this._handleSelect}>
                       <option className='select-collection__option' value='0'>Chose a collection</option>
@@ -51,16 +51,18 @@ class SelectCollection extends React.Component {
                 }
                 {
                   favorite && 
-                    <>
+                  <>
+                    <div className='movie-rating'>
                     <MovieRating 
                       movie={this.props.movie} 
                       collections={collections}
                       idCollection={this.state.idCollection}
                       onRating={ratingMovies} 
                     />
-                    <p>This movie belongs to <strong>{this.state.nameCollection}</strong> collection.</p>   
+                    </div>
+                    <p>This movie belongs to "<strong>{this.state.nameCollection}</strong>" collection.</p>   
                     <form className='select-collection__form' onSubmit={this._handleSubmitDelete}>
-                      <button className='delete__button' type='submit' >Delete from {this.state.nameCollection} collection</button>
+                      <button className='delete__button' type='submit' >Delete from "{this.state.nameCollection}" collection</button>
                     </form>
                   </>   
                 }
@@ -68,24 +70,25 @@ class SelectCollection extends React.Component {
                 {
                   favorite 
                   ? <span></span>
-                  : <>
-                    <button className='my-fav-movies__button' onClick={this.showNew}>Create a collection!</button>
+                  : <div className='create-collection'>
+                    <button className='create-collection__button' onClick={this.showNew}>Create a collection!</button>
                     {
                       showingNew &&
                       <NewCollection onSubmit={addCollection} />
                     }
-                    </> 
+                    </div> 
                 }
-                
               </div>
           }
       </Context.Consumer>
     )
   }
   componentDidMount = async () => {
-    await this.getIdCollection(this.props.movie, this.props.collections)
-    await this.getFavMovie(this.props.movie, this.state.idCollection, this.props.collections)
-    await this.getNameCollection(this.props.movie, this.props.collections)
+    if (this.props.collections.length > 0) {
+      await this._getIdCollection(this.props.movie, this.props.collections)
+      await this._getFavMovie(this.props.movie, this.state.idCollection, this.props.collections)
+      await this._getNameCollection(this.props.movie, this.props.collections)
+    }
   }
   showForm = () => {
     this.setState({ showingForm: true })
@@ -127,7 +130,7 @@ class SelectCollection extends React.Component {
      })
     console.log('valor de la idCollection en el state: ', idCollection)
   }
-  getFavMovie = ( currentMovie, idCollection, collections ) => {
+  _getFavMovie = ( currentMovie, idCollection, collections ) => {
     collections.map(collection => {
       if ( collection.id === idCollection) {
         const favMovies = collection.favMovies
@@ -141,7 +144,7 @@ class SelectCollection extends React.Component {
       }
     })
   }
-  getIdCollection = ( currentMovie, collections ) => {
+  _getIdCollection = ( currentMovie, collections ) => {
     collections.map( collection => {
       if (collection.favMovies.find(({ id }) => id === currentMovie.id)) {
         console.log('valor de idCollection: ', collection.id)
@@ -149,7 +152,7 @@ class SelectCollection extends React.Component {
       } 
     })
   }
-  getNameCollection =  ( currentMovie, collections ) => {
+  _getNameCollection =  ( currentMovie, collections ) => {
     collections.map( collection => {
       if (collection.favMovies.find(({ id }) => id === currentMovie.id)) {
         console.log('valor de nameCollection: ', collection.title)

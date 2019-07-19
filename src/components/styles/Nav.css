@@ -2,7 +2,9 @@
 
 .navbar {
     box-shadow: 0px 5px 5px grey;
+    width: 100%;
     padding: 5px 10px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between; 
     font-family: 'Anton', sans-serif;
@@ -19,7 +21,17 @@
     display: inline;
     padding: 0 10px;
 }
-a:hover, a:visited, a:link, a:active {
+a, a:visited, a:link, a:active {
     text-decoration: none;
     color:black;
 }
+a.menu__link:hover, a.menu__link:focus {
+    color:  #4032be;
+}
+a.menu__link--active {
+    color: #4032be;
+}
+
+
+
+

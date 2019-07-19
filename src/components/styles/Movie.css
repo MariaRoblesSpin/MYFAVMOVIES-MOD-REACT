@@ -1,22 +1,37 @@
 .movie-resume {
     list-style: none;
     width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-.movie-resume__image {
+
+.movie-resume__image-box {
     width: 40%;
+    box-sizing: border-box;
+    padding-right: 30px;
+}
+.movie-resume__image {
+    width: 100%;
     border-radius: 10px;
-    margin-right: 30px;
     box-shadow: 0px 5px 5px grey;
 }
 .movie-resume__info {
     width: 60%;
-
+    box-sizing: border-box
 }
 .movie-resume__title {
+    box-sizing: border-box;
     font-family: 'Anton', sans-serif;
     font-size: 30px;
     font-weight: 500;
+    margin-top: 0;
+}
+.movie-resume__more {
+    color: #4032be;
+    font-weight: bold;
+}
+p.movie-resume__more:hover {
+    cursor: pointer;
 }

@@ -20,13 +20,13 @@
     border: 1px solid gray;
     padding: 5px;
 }
-.select-collection__button {
-    padding: 0px 15px;
-    border-radius: 3px;
-    border: 1px solid gray;
-    background-color: white;
-    font-family: 'Anton', sans-serif;
+.select-collection__button, 
+.create-collection__button,
+.delete__button {
     font-size: 24px;
+}
+.select-collection__button {
+    margin: 0;
 }
 .select-collection__option {
     border-radius: 3px;
@@ -35,6 +35,11 @@
     font-size: 15px;
     font-family: 'Roboto';
     vertical-align: middle;
+}
+.select-collection__fav-movie {
+    display: inline;
+    margin-left: 20px;
+    font-size: 20px;
 }
 .delete__select {
     border-radius: 3px;
@@ -55,14 +60,7 @@
     border: 1px solid gray;
     padding: 5px;
 }
-.delete__button {
-    padding: 0px 15px;
-    border-radius: 3px;
-    border: 1px solid gray;
-    background-color: white;
-    font-family: 'Anton', sans-serif;
-    font-size: 24px;
-}
+
 .delete__option {
     border-radius: 3px;
     border: 1px solid gray;
@@ -71,4 +69,19 @@
     font-family: 'Roboto';
     vertical-align: middle;
 }
+.svg-inline--fa {
+    height: 1.7em !important;
+    color: #4032be;
+}
+.svg-inline--fa.fa-w-16 {
+    width: 1.7em;
+    color: #4032be;
+}
+
+.create-collection {
+    width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
 

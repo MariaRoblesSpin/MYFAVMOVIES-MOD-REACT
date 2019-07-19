@@ -34,7 +34,7 @@ class NewMovies extends React.Component {
       <Context.Consumer>
         {
           ({ collections }) => 
-            <>
+            <main className='new-movies'>
               <h1 className='new-movies__title'>Discover the news</h1>
               <Showcase 
                 keyFn={element => element.id} 
@@ -45,7 +45,7 @@ class NewMovies extends React.Component {
                   </Link>
                 } 
               />
-            </>
+            </main>
         }
       </Context.Consumer>
       // tiene que mostrar una lista de películas nuevas

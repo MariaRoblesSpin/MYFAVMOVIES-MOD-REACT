@@ -1,4 +1,5 @@
 .form-new-list {
+    width: 100%;
     padding: 20px 0;
     box-sizing: border-box;
     display: flex;
@@ -34,11 +35,11 @@
     font-family: 'Roboto'
 }
 .form-new-list__button {
-    width: auto;
-    padding: 0px 15px;
-    border-radius: 3px;
-    border: 1px solid gray;
-    background-color: white;
-    font-family: 'Anton', sans-serif;
     font-size: 28px;
+}
+.form-new-list__message {
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
 }
