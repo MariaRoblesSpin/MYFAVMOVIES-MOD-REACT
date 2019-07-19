@@ -1,7 +1,8 @@
 # MyFavMovies
 
 A little React App to keep your favorite movies into collections... and rate them!
-With "MyFavMovies" you can:
+
+With **MyFavMovies** you can:
 - Create your own collections with a name and a description.
 - Delete a collection.
 - Add many movies to one collection of your choice.
@@ -9,7 +10,7 @@ With "MyFavMovies" you can:
 - Rate the movie and update the rating as long as you want.
 - Search movies at the searching form placed in the navBar.
 
-Try it and Enjoy the ride!
+Try it and **enjoy the ride**!
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
