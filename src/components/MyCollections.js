@@ -57,7 +57,6 @@ class MyCollections extends React.Component {
   }
   showForm = async (event) => {
       await this.setState({ showingForm : parseInt(event.target.id) }) 
-      await console.log('valor de showingForm: ', this.state.showingForm)
   }
   hideForm = (event) => {
     this.setState({ showingForm: parseInt(event.target.id) + 1 })

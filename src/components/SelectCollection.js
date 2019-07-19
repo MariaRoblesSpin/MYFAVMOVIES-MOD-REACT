@@ -112,12 +112,18 @@ class SelectCollection extends React.Component {
     event.preventDefault()
     const { value } = this.state
     const movie = this.props.movie
-    this.setState({ 
+    
+    console.log('valor de value: ', value)
+    console.log('valor de expresion value: ', value != undefined)
+    if (value != undefined) {
+      this.setState({ 
       showingForm: false,
       favorite: true,
       idCollection: value
     })
-    this.props.onSelect({ value, movie })
+      console.log('entra por value')
+      this.props.onSelect({ value, movie })
+    }
   }
   _handleSubmitDelete = (event) => {
     event.preventDefault()

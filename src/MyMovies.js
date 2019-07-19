@@ -86,6 +86,7 @@ class MyMovies extends React.Component {
       'collections',
       JSON.stringify(nextState)
     )
+    
   }
   deleteMovieFromCollection = idCollectionObj => {
     const selectedCollection = idCollectionObj.idCollection

@@ -18,7 +18,6 @@ class MovieDetails extends React.Component {
     error: false,
     movie: {}
   }
-  
   componentDidMount = async () => {
     this.setState({ loading: true })
     try {
@@ -28,16 +27,6 @@ class MovieDetails extends React.Component {
       this.setState({ error: true })
     } finally {
       this.setState({ loading: false })
-    }
-  }
-  componentWillUpdate = async (prevProps, prevState) => {
-    const results = await movie(this.props.match.params.id);
-    if (prevState.movie.id === undefined) {
-      return
-    } else if (prevState.movie.id != this.props.match.params.id) {
-      this.setState({ movie: results })
-    } else {
-      return
     }
   }
    render () {
@@ -55,7 +44,12 @@ class MovieDetails extends React.Component {
             
             <div className='movie'>
               <div className='movie__image-box'>
-                <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
+                {
+                  movie.poster_path === undefined 
+                  ? <span></span>
+                  : <img className='movie__image' src={IMAGE_URL + movie.poster_path} alt={movie.title} />
+                }
+                
               </div>    
               <div className='movie-info'>
                 <h1 className='movie-info__title'>{movie.title}</h1>

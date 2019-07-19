@@ -8,9 +8,6 @@ class MyFavMovies extends React.Component {
   state = { showingForm: false }
   render () {
     const { showingForm } = this.state
-    // Estos sería necesario para comprobar la longitud de las colecciones si en lugar de un array fuera un objeto 
-    // const objectKeys = Object.keys(collections)
-    // const lengthObject = objectKeys.length 
     return (
       <Context.Consumer>
         {
@@ -22,8 +19,6 @@ class MyFavMovies extends React.Component {
             <NewCollection onSubmit={addCollection} />
           }
           {
-            //lengthObject > 0 
-            //para el caso del objeto con el id como índice.
             collections.length > 0
               ? <MyCollections details={collections} onDelete={deleteCollection} />
               : <p className='my-fav-movies__message'>There is no collection created yet.</p>

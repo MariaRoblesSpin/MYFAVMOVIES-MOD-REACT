@@ -17,6 +17,13 @@ export default () =>
       const { query } = match.params
       return <SearchResults key={query} query={query} />
     }} />
-  <Route component={() => <main><p className='error__message'><span className='error__message--bigger'>Error 404</span><br/>Upssssss, we can't find what you're looking for</p></main>} />
+  <Route component={() => 
+    <main>
+      <p className='error__message'>
+        <span className='error__message--bigger'>Error 404</span><br/>
+        Upssssss, we can't find what you're looking for
+        </p></main>
+    }
+  />
 </Switch>
 

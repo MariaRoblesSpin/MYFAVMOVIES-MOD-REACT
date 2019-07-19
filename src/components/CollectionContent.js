@@ -3,16 +3,7 @@ import Showcase from './Showcase'
 import Movie from './Movie'
 import { Link } from 'react-router-dom'
 
-// const MOVIES = Array
-// .from({ length: 10 })
-// .map((_, index) => ({
-//   id: index,
-//   title: 'un nombre', 
-//   release_date:'2019', 
-//   image: '', 
-//   description: 'una descripción cualesquiera',
-//   more: '+ more info'
-// }))
+
 class CollectionContent extends React.Component {
   render () {
     return (
